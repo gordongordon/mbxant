@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 const pxtorem = require('postcss-pxtorem');
+//const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+
 
 module.exports = {
   devtool: 'eval',
@@ -19,7 +21,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
-      root: __dirname,
+//      root: __dirname,
       modulesDirectories: [
         'node_modules',
         path.join(__dirname, '../node_modules'),
@@ -36,7 +38,17 @@ module.exports = {
    {
       test: /\.css$/,
       loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]
-    }],
+    },
+    {
+      test: /\.(svg)$/i,
+      loader: 'svg-sprite-loader',
+      include: [
+        require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. svg files of antd-mobile
+        // path.resolve(__dirname, 'src/my-project-svg-foler'),  // folder of svg files in your project
+      ]
+    },
+
+  ],
     rules: [
       {
         exclude: [
@@ -68,7 +80,7 @@ module.exports = {
         use: [
           require.resolve('style-loader'),
           require.resolve('css-loader'),
-          {
+        {
             loader: require.resolve('postcss-loader'),
             options: {
               ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
