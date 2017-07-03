@@ -50,6 +50,7 @@
   "dependencies": {
     "antd": "^2.5.3",
     "antd-mobile": "^1.4.1",
+    "antd-mobile-demo-data": "^0.1.4",
     "mobx": "^2.2.2",
     "mobx-react": "^3.3.1",
     "mobx-react-devtools": "^4.2.0",
